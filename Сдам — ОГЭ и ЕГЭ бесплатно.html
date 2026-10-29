@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сдам — ОГЭ и ЕГЭ бесплатно</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Onest:wght@400;600&display=swap">
+<style>
+:root{--bg:#fbfcff;--grid:#dbe4f5;--ink:#1d2a4d;--mut:#5d6a8a;--card:#ffffff;--acc:#2a4bd7;--ok:#1d8a4e;--bad:#d1322f;--line:#c8d3ee;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a2e;--grid:#222b47;--ink:#e8ecfb;--mut:#9aa6c9;--card:#1b2340;--acc:#8ea2ff;--ok:#5fd394;--bad:#ff7b78;--line:#323d63}}
+:root[data-theme="dark"]{--bg:#141a2e;--grid:#222b47;--ink:#e8ecfb;--mut:#9aa6c9;--card:#1b2340;--acc:#8ea2ff;--ok:#5fd394;--bad:#ff7b78;--line:#323d63}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);font:400 16px/1.5 Onest,system-ui,sans-serif;min-height:100vh}
+main{max-width:560px;margin:0 auto;padding:20px 16px 48px}
+h1{font:700 52px/1 Caveat,cursive;margin:8px 0 4px;color:var(--acc)}
+p{margin:0}.mut{color:var(--mut)}
+.tabs{display:flex;gap:8px;margin:20px 0 14px}
+.tab{flex:1;padding:12px;border:2px solid var(--ink);background:var(--card);color:var(--ink);font:600 16px Onest,sans-serif;border-radius:10px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.subj{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;padding:14px 16px;margin-bottom:10px;background:var(--card);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font:600 16px Onest,sans-serif;cursor:pointer}
+.subj small{font-weight:400;color:var(--mut)}
+.subj{box-shadow:3px 3px 0 var(--line);font-size:17px}.subj[disabled]{opacity:.55;cursor:default}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok)}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:18px}
+.q{font-size:18px;margin:6px 0 16px}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:400 16px Onest,sans-serif;cursor:pointer}
+input[type=text]{width:100%;padding:12px;font:400 18px Onest,sans-serif;border:1.5px solid var(--ink);border-radius:8px;background:var(--bg);color:var(--ink)}
+.btn{margin-top:12px;padding:12px 18px;border:0;border-radius:8px;background:var(--acc);color:#fff;font:600 16px Onest,sans-serif;cursor:pointer}
+:root[data-theme="dark"] .btn{color:#141a2e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#141a2e}}
+.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.ok{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--bg))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,var(--bg))}
+.links{margin-top:22px;font-size:14px}.links a{color:var(--acc)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+function Q(q,a,o){return {q:q,a:a,o:o}}
+var M=[Q("Найдите значение выражения 3,6 · 2,5.","9"),Q("Решите уравнение 2x − 7 = 13.","10"),Q("Сколько процентов число 18 составляет от числа 60?","30"),Q("Площадь квадрата равна 49 см². Найдите его периметр (в см).","28")];
+var R=[Q("В каком слове ударение падает на первый слог?","средство",["красивее","торты","средство","звонит"]),Q("Сколько слогов в слове «яблоко»?","3"),Q("В каком слове на конце пишется мягкий знак?","рож_",["рож_","луч_","мяч_","нож_"]),Q("Сколько грамматических основ в предложении: «Идёт дождь, и мы остались дома»?","2")];
+var DATA={
+ "ОГЭ":{
+  "🧮 Математика":M,"📖 Русский язык":R,
+  "💻 Информатика":[Q("Сколько бит в одном байте?","8"),Q("Переведите двоичное число 101 в десятичную систему.","5"),Q("Сколько байт в одном Кбайте?","1024")],
+  "⚡ Физика":[Q("Какая единица измерения силы?","ньютон",["ньютон","джоуль","ватт","паскаль"]),Q("Переведите 72 км/ч в м/с.","20"),Q("Напряжение 12 В, сила тока 3 А. Чему равно сопротивление (в Ом)?","4")],
+  "🧪 Химия":[Q("Химический символ натрия?","Na",["Na","N","K","Ne"]),Q("Формула воды (латиницей, с цифрой)?","h2o"),Q("Сколько электронов у атома кислорода?","8")],
+  "🌿 Биология":[Q("Какой органоид отвечает за фотосинтез?","хлоропласт",["хлоропласт","митохондрия","рибосома","ядро"]),Q("Сколько хромосом в соматической клетке человека?","46"),Q("Как называется наука о клетке?","цитология",["цитология","гистология","генетика","экология"])],
+  "🌍 География":[Q("Самый большой океан?","Тихий",["Тихий","Атлантический","Индийский","Северный Ледовитый"]),Q("Самое глубокое озеро мира?","Байкал",["Байкал","Ладожское","Онежское","Каспийское"]),Q("Столица Австралии?","Канберра",["Канберра","Сидней","Мельбурн","Перт"])],
+  "🏰 История":[Q("В каком году было Крещение Руси?","988"),Q("В каком году началась Великая Отечественная война?","1941"),Q("Кто основал Санкт-Петербург?","Пётр I",["Пётр I","Иван III","Екатерина II","Иван IV"])],
+  "⚖️ Обществознание":[Q("Как называется основной закон государства?","Конституция",["Конституция","Кодекс","Указ","Устав"]),Q("С какого возраста в России наступает совершеннолетие?","18"),Q("Что такое инфляция?","рост общего уровня цен",["рост общего уровня цен","падение цен","рост зарплат","рост курса валюты"])],
+  "📚 Литература":[Q("Кто автор романа в стихах «Евгений Онегин»?","Пушкин",["Пушкин","Лермонтов","Гоголь","Тургенев"]),Q("Кто автор поэмы «Мёртвые души»?","Гоголь",["Гоголь","Толстой","Чехов","Достоевский"]),Q("Кто автор романа «Война и мир»?","Толстой",["Толстой","Тургенев","Гончаров","Бунин"])],
+  "🇬🇧 Английский":[Q("She ___ to school every day.","goes",["goes","go","going","gone"]),Q("Прошедшее время глагола go?","went",["went","goed","gone","going"]),Q("Переведите на английский: «яблоко».","apple")]
+ },
+ "ЕГЭ":{
+  "🧮 Математика (профиль)":[Q("Найдите корень уравнения log₂(x + 3) = 4.","13"),Q("Найдите значение выражения √(49 · 16).","28"),Q("Найдите значение производной функции y = x³ − 3x в точке x = 2.","9"),Q("В коробке 3 красных и 7 синих шаров. Вероятность вытащить красный? (десятичной дробью)","0.3")],
+  "📖 Русский язык":[Q("На какой по счёту слог падает ударение в слове «алфавит»?","3"),Q("Какая часть речи слово «быстро» в предложении «Он быстро бежал»?","наречие",["наречие","прилагательное","существительное","глагол"]),Q("В каком слове приставка пре- значит «очень»?","преинтересный",["преинтересный","привокзальный","приморский","пришкольный"])],
+  "💻 Информатика":[Q("Переведите двоичное число 1011 в десятичную систему.","11"),Q("Переведите число 25 в двоичную систему.","11001"),Q("Сколько байт в 2 Кбайт?","2048"),Q("Чему равно значение выражения (1 ИЛИ 0) И 0 ?","0")],
+  "⚡ Физика":[Q("Масса тела 2 кг, ускорение 3 м/с². Чему равна сила (в Н)?","6"),Q("Какая единица измерения электрической ёмкости?","фарад",["фарад","генри","тесла","вебер"]),Q("Скорость света в вакууме примерно (в км/с)?","300000")],
+  "🧪 Химия":[Q("Чему равна молярная масса H₂SO₄ (г/моль)?","98"),Q("Какой pH у нейтрального раствора при 25 °C?","7"),Q("Сколько протонов в атоме углерода?","6")],
+  "🌿 Биология":[Q("Сколько нуклеотидов кодирует одну аминокислоту?","3"),Q("Как называется синтез белка на рибосоме?","трансляция",["трансляция","транскрипция","репликация","мутация"]),Q("Сколько хромосом в гамете человека?","23")],
+  "🌍 География":[Q("Какая страна самая большая по площади?","Россия",["Россия","Канада","Китай","США"]),Q("Самая высокая вершина мира?","Эверест",["Эверест","Эльбрус","Килиманджаро","Монблан"]),Q("Чему равна широта экватора (в градусах)?","0")],
+  "🏰 История":[Q("В каком году отменено крепостное право в России?","1861"),Q("В каком году была Куликовская битва?","1380"),Q("В каком году была Полтавская битва?","1709")],
+  "⚖️ Обществознание":[Q("На сколько ветвей делится государственная власть по принципу разделения властей?","3"),Q("Спрос вырос, предложение не изменилось. Что будет с ценой?","растёт",["растёт","падает","не меняется","станет нулевой"]),Q("Кто глава государства в России?","Президент",["Президент","Председатель правительства","Председатель Госдумы","Патриарх"])],
+  "📚 Литература":[Q("Кто автор романа «Преступление и наказание»?","Достоевский",["Достоевский","Толстой","Тургенев","Чехов"]),Q("Кто автор романа «Мастер и Маргарита»?","Булгаков",["Булгаков","Шолохов","Платонов","Пастернак"]),Q("Кто автор романа «Герой нашего времени»?","Лермонтов",["Лермонтов","Пушкин","Гоголь","Тютчев"])],
+  "🇬🇧 Английский":[Q("If I ___ rich, I would travel the world.","were",["were","was","am","be"]),Q("She has lived here ___ 2010.","since",["since","for","during","from"]),Q("Переведите на английский: «библиотека».","library")]
+ }
+};
+var st={exam:"ОГЭ",subj:null,i:0,done:false,score:0};
+var prog={};
+try{prog=JSON.parse(localStorage.getItem("sdam_prog")||"{}")}catch(e){prog={}}
+function save(){try{localStorage.setItem("sdam_prog",JSON.stringify(prog))}catch(e){}}
+function norm(s){return String(s).trim().toLowerCase().replace(",",".").replace(/\s+/g,"")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+var app=document.getElementById("app");
+function home(){
+ st.subj=null;
+ var h='<h1>Сдам</h1><p class="mut">ОГЭ и ЕГЭ бесплатно и без рекламы. Выбери экзамен и предмет.</p>';
+ h+='<div class="tabs" role="tablist">';
+ ["ОГЭ","ЕГЭ"].forEach(function(e){h+='<button class="tab" role="tab" aria-selected="'+(st.exam===e)+'" data-exam="'+e+'">'+e+'</button>'});
+ h+='</div>';
+ var subs=DATA[st.exam];
+ Object.keys(subs).forEach(function(n){
+  var qs=subs[n],key=st.exam+"|"+n;
+  if(!qs){h+='<button class="subj" disabled><span>'+n+'</span><small>скоро</small></button>';return}
+  var best=prog[key]||0,pc=Math.round(best/qs.length*100);
+  h+='<button class="subj" data-s="'+esc(n)+'"><span>'+n+'<div class="bar"><i style="width:'+pc+'%"></i></div></span><small>'+best+' из '+qs.length+'</small></button>';
+ });
+ var f=st.exam==="ОГЭ"?"https://fipi.ru/oge/otkrytyy-bank-zadaniy-oge":"https://fipi.ru/ege/otkrytyy-bank-zadaniy-ege";
+ h+='<p class="links mut">Больше заданий: <a href="'+f+'" target="_blank" rel="noopener">открытый банк ФИПИ</a>. Пока по несколько заданий на предмет, будем добавлять.</p>';
+ app.innerHTML=h;
+ app.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){st.exam=b.dataset.exam;home()}});
+ app.querySelectorAll(".subj[data-s]").forEach(function(b){b.onclick=function(){st.subj=b.dataset.s;st.i=0;st.score=0;st.done=false;quiz()}});
+}
+function quiz(){
+ var qs=DATA[st.exam][st.subj],key=st.exam+"|"+st.subj;
+ if(st.i>=qs.length){
+  if((prog[key]||0)<st.score){prog[key]=st.score;save()}
+  app.innerHTML='<div class="top"><button class="btn ghost" id="b">Назад</button></div><div class="card"><h1>Готово</h1><p class="q">Верно: '+st.score+' из '+qs.length+'.</p><button class="btn" id="r">Пройти ещё раз</button></div>';
+  document.getElementById("b").onclick=home;
+  document.getElementById("r").onclick=function(){st.i=0;st.score=0;quiz()};
+  return;
+ }
+ var q=qs[st.i],h='<div class="top"><button class="btn ghost" id="b">Назад</button><span class="mut">'+st.exam+" · "+esc(st.subj)+" · "+(st.i+1)+"/"+qs.length+'</span></div><div class="card"><p class="q">'+esc(q.q)+'</p>';
+ if(q.o){q.o.forEach(function(o){h+='<button class="opt" data-v="'+esc(o)+'">'+esc(o.replace("_","ь"))+'</button>'})}
+ else{h+='<input type="text" id="in" inputmode="decimal" autocomplete="off" placeholder="Ответ"><button class="btn" id="ck">Проверить</button>'}
+ h+='<p id="res" style="margin-top:14px"></p></div>';
+ app.innerHTML=h;
+ document.getElementById("b").onclick=home;
+ function finish(ok,box){
+  if(ok)st.score++;
+  var shown=q.o?q.a.replace("_","ь"):q.a.replace(".",",");
+  document.getElementById("res").innerHTML=(ok?'<span class="ok">Верно!</span>':'<span class="bad">Неверно.</span> Правильный ответ: '+esc(shown))+'<br><button class="btn" id="nx">Дальше</button>';
+  document.getElementById("nx").onclick=function(){st.i++;quiz()};
+ }
+ if(q.o){app.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){
+  app.querySelectorAll(".opt").forEach(function(x){x.disabled=true;if(x.dataset.v===q.a)x.classList.add("right")});
+  var ok=b.dataset.v===q.a;if(!ok)b.classList.add("wrong");finish(ok);}})}
+ else{document.getElementById("ck").onclick=function(){
+  var v=document.getElementById("in");if(!v.value.trim())return;v.disabled=true;this.disabled=true;finish(norm(v.value)===norm(q.a));}}
+}
+home();
+</script>
+</body>
+</html>
